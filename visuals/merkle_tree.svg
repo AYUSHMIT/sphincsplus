@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="rootGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f23"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#667eea" text-anchor="middle">
+    SPHINCS+ Hypertree Structure
+  </text>
+  
+  <text x="600" y="85" font-family="Arial, sans-serif" font-size="16" fill="#b4b4b4" text-anchor="middle">
+    Merkle Tree-based Signature Scheme with Authentication Path
+  </text>
+  
+  <!-- Tree Structure -->
+  <g id="tree">
+    <!-- Level 0: Root (Public Key) -->
+    <g id="level0">
+      <!-- Root node -->
+      <ellipse cx="600" cy="150" rx="80" ry="40" fill="url(#rootGrad)" stroke="#ffffff" stroke-width="3" filter="url(#glow)">
+        <animate attributeName="ry" values="40;45;40" dur="2s" repeatCount="indefinite"/>
+      </ellipse>
+      <text x="600" y="145" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Root</text>
+      <text x="600" y="165" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">Public Key</text>
+      
+      <!-- Label -->
+      <text x="700" y="155" font-family="Arial, sans-serif" font-size="14" fill="#4facfe" text-anchor="start">
+        ← Layer d (top)
+      </text>
+    </g>
+    
+    <!-- Connections level 0 to 1 -->
+    <line x1="550" y1="185" x2="400" y2="265" stroke="#f093fb" stroke-width="2" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite"/>
+    </line>
+    <line x1="650" y1="185" x2="800" y2="265" stroke="#f093fb" stroke-width="2" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Level 1: Internal nodes -->
+    <g id="level1">
+      <ellipse cx="400" cy="280" rx="70" ry="35" fill="url(#nodeGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="400" y="285" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">Node L</text>
+      
+      <ellipse cx="800" cy="280" rx="70" ry="35" fill="url(#nodeGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="800" y="285" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">Node R</text>
+      
+      <!-- Label -->
+      <text x="900" y="285" font-family="Arial, sans-serif" font-size="14" fill="#f093fb" text-anchor="start">
+        ← Layer d-1
+      </text>
+    </g>
+    
+    <!-- Connections level 1 to 2 -->
+    <line x1="350" y1="310" x2="250" y2="385" stroke="#4facfe" stroke-width="2"/>
+    <line x1="450" y1="310" x2="550" y2="385" stroke="#4facfe" stroke-width="2"/>
+    <line x1="750" y1="310" x2="650" y2="385" stroke="#4facfe" stroke-width="2"/>
+    <line x1="850" y1="310" x2="950" y2="385" stroke="#4facfe" stroke-width="2"/>
+    
+    <!-- Level 2: More internal nodes -->
+    <g id="level2">
+      <ellipse cx="250" cy="400" rx="60" ry="30" fill="url(#leafGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="250" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">N0</text>
+      
+      <ellipse cx="550" cy="400" rx="60" ry="30" fill="url(#leafGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="550" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">N1</text>
+      
+      <ellipse cx="650" cy="400" rx="60" ry="30" fill="url(#leafGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="650" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">N2</text>
+      
+      <ellipse cx="950" cy="400" rx="60" ry="30" fill="url(#leafGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="950" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">N3</text>
+      
+      <!-- Label -->
+      <text x="1030" y="405" font-family="Arial, sans-serif" font-size="14" fill="#4facfe" text-anchor="start">
+        ← Layer 1
+      </text>
+    </g>
+    
+    <!-- Connections level 2 to leaves -->
+    <line x1="220" y1="425" x2="170" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="280" y1="425" x2="330" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="520" y1="425" x2="470" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="580" y1="425" x2="630" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="620" y1="425" x2="570" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="680" y1="425" x2="730" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="920" y1="425" x2="870" y2="505" stroke="#43e97b" stroke-width="2"/>
+    <line x1="980" y1="425" x2="1030" y2="505" stroke="#43e97b" stroke-width="2"/>
+    
+    <!-- Level 3: Leaf nodes (WOTS+ signatures) -->
+    <g id="level3">
+      <rect x="145" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="170" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L0</text>
+      
+      <rect x="305" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="330" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L1</text>
+      
+      <rect x="445" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="470" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L2</text>
+      
+      <rect x="605" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2" filter="url(#glow)">
+        <animate attributeName="height" values="40;48;40" dur="1.5s" repeatCount="indefinite"/>
+      </rect>
+      <text x="630" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L3</text>
+      <text x="630" y="575" font-family="Arial, sans-serif" font-size="10" fill="#43e97b" text-anchor="middle">WOTS+</text>
+      
+      <rect x="705" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="730" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L4</text>
+      
+      <rect x="845" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="870" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L5</text>
+      
+      <rect x="1005" y="510" width="50" height="40" rx="5" fill="url(#authGrad)" stroke="#ffffff" stroke-width="2"/>
+      <text x="1030" y="535" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f0f23" text-anchor="middle">L6</text>
+      
+      <!-- Label -->
+      <text x="1070" y="535" font-family="Arial, sans-serif" font-size="14" fill="#43e97b" text-anchor="start">
+        ← Layer 0 (WOTS+)
+      </text>
+    </g>
+    
+    <!-- Authentication Path (highlighted) -->
+    <g id="auth-path">
+      <!-- Highlight selected leaf -->
+      <rect x="600" y="505" width="60" height="50" rx="5" fill="none" stroke="#feca57" stroke-width="4" stroke-dasharray="8,4">
+        <animate attributeName="stroke-dashoffset" from="12" to="0" dur="0.8s" repeatCount="indefinite"/>
+      </rect>
+      
+      <!-- Auth path arrows -->
+      <path d="M 655 520 L 700 520" stroke="#feca57" stroke-width="3" marker-end="url(#arrowAuth)"/>
+      <text x="680" y="515" font-family="Arial, sans-serif" font-size="11" fill="#feca57" text-anchor="middle">Auth</text>
+    </g>
+    
+    <defs>
+      <marker id="arrowAuth" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#feca57" />
+      </marker>
+    </defs>
+  </g>
+  
+  <!-- Legend and explanations -->
+  <g id="legend">
+    <rect x="50" y="620" width="1100" height="240" fill="#1a1a2e" stroke="#667eea" stroke-width="2" rx="15"/>
+    
+    <text x="600" y="650" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#667eea" text-anchor="middle">
+      How SPHINCS+ Hypertree Works
+    </text>
+    
+    <!-- Column 1 -->
+    <g id="col1">
+      <rect x="70" y="670" width="25" height="25" fill="url(#rootGrad)" stroke="#ffffff" stroke-width="1" rx="3"/>
+      <text x="105" y="687" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start" font-weight="bold">Root Node</text>
+      <text x="105" y="703" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Forms the public key
+      </text>
+      <text x="105" y="718" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Hash of child nodes
+      </text>
+      
+      <rect x="70" y="735" width="25" height="25" fill="url(#nodeGrad)" stroke="#ffffff" stroke-width="1" rx="3"/>
+      <text x="105" y="752" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start" font-weight="bold">Internal Nodes</text>
+      <text x="105" y="768" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • d layers of subtrees
+      </text>
+      <text x="105" y="783" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Each signed by layer above
+      </text>
+      
+      <rect x="70" y="800" width="25" height="25" fill="url(#authGrad)" stroke="#ffffff" stroke-width="1" rx="3"/>
+      <text x="105" y="817" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start" font-weight="bold">Leaf Nodes</text>
+      <text x="105" y="833" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • WOTS+ signatures
+      </text>
+    </g>
+    
+    <!-- Column 2 -->
+    <g id="col2">
+      <text x="410" y="687" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start" font-weight="bold">Signature Process:</text>
+      <text x="410" y="707" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        1. Hash message with FORS
+      </text>
+      <text x="410" y="725" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        2. Select authentication path
+      </text>
+      <text x="410" y="743" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        3. Generate WOTS+ signatures at each layer
+      </text>
+      <text x="410" y="761" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        4. Collect sibling nodes for authentication
+      </text>
+      <text x="410" y="779" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        5. Package all components into signature
+      </text>
+      
+      <text x="410" y="807" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start" font-weight="bold">Verification:</text>
+      <text x="410" y="827" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        Recompute tree root from leaf using auth path
+      </text>
+    </g>
+    
+    <!-- Column 3 -->
+    <g id="col3">
+      <rect x="760" y="670" width="20" height="20" fill="none" stroke="#feca57" stroke-width="3" stroke-dasharray="4,2" rx="2"/>
+      <text x="790" y="685" font-family="Arial, sans-serif" font-size="12" fill="#feca57" text-anchor="start" font-weight="bold">Authentication Path</text>
+      <text x="790" y="703" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Path from leaf to root
+      </text>
+      <text x="790" y="718" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Includes sibling hashes
+      </text>
+      <text x="790" y="733" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Allows verification
+      </text>
+      
+      <text x="790" y="760" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start" font-weight="bold">Parameters:</text>
+      <text x="790" y="778" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • h = total tree height
+      </text>
+      <text x="790" y="793" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • d = number of layers
+      </text>
+      <text x="790" y="808" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • Each subtree height = h/d
+      </text>
+      <text x="790" y="823" font-family="Arial, sans-serif" font-size="10" fill="#b4b4b4" text-anchor="start">
+        • More layers = faster signing
+      </text>
+    </g>
+  </g>
+  
+  <!-- Footer -->
+  <text x="600" y="885" font-family="Arial, sans-serif" font-size="12" fill="#888888" text-anchor="middle">
+    This structure provides quantum-resistant signatures based only on hash function security
+  </text>
+</svg>
