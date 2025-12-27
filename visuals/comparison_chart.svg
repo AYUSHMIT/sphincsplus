@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#0f0f23"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="url(#grad1)" text-anchor="middle">
+    SPHINCS+ Parameter Comparison
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="85" font-family="Arial, sans-serif" font-size="18" fill="#b4b4b4" text-anchor="middle">
+    Signature Size, Security Level, and Performance Trade-offs
+  </text>
+  
+  <!-- Chart Area -->
+  <g id="chart">
+    <!-- Axes -->
+    <line x1="100" y1="650" x2="1100" y2="650" stroke="#ffffff" stroke-width="2"/>
+    <line x1="100" y1="150" x2="100" y2="650" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- Y-axis labels (Signature Size) -->
+    <text x="85" y="155" font-family="Arial, sans-serif" font-size="14" fill="#b4b4b4" text-anchor="end">50KB</text>
+    <text x="85" y="280" font-family="Arial, sans-serif" font-size="14" fill="#b4b4b4" text-anchor="end">40KB</text>
+    <text x="85" y="405" font-family="Arial, sans-serif" font-size="14" fill="#b4b4b4" text-anchor="end">30KB</text>
+    <text x="85" y="530" font-family="Arial, sans-serif" font-size="14" fill="#b4b4b4" text-anchor="end">20KB</text>
+    <text x="85" y="655" font-family="Arial, sans-serif" font-size="14" fill="#b4b4b4" text-anchor="end">0KB</text>
+    
+    <!-- Y-axis title -->
+    <text x="30" y="400" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#667eea" text-anchor="middle" transform="rotate(-90 30 400)">
+      Signature Size (bytes)
+    </text>
+    
+    <!-- Bars for each parameter set -->
+    <!-- 128s: 7,856 bytes -->
+    <rect x="150" y="571" width="130" height="79" fill="url(#grad1)" rx="5">
+      <animate attributeName="height" from="0" to="79" dur="1s" fill="freeze"/>
+      <animate attributeName="y" from="650" to="571" dur="1s" fill="freeze"/>
+    </rect>
+    <text x="215" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">128s</text>
+    <text x="215" y="710" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">7,856 B</text>
+    <text x="215" y="728" font-family="Arial, sans-serif" font-size="11" fill="#43e97b" text-anchor="middle">⭐⭐⭐</text>
+    
+    <!-- 128f: 17,088 bytes -->
+    <rect x="300" y="479" width="130" height="171" fill="url(#grad1)" rx="5">
+      <animate attributeName="height" from="0" to="171" dur="1.2s" fill="freeze"/>
+      <animate attributeName="y" from="650" to="479" dur="1.2s" fill="freeze"/>
+    </rect>
+    <text x="365" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">128f</text>
+    <text x="365" y="710" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">17,088 B</text>
+    <text x="365" y="728" font-family="Arial, sans-serif" font-size="11" fill="#43e97b" text-anchor="middle">⭐⭐⭐⭐⭐</text>
+    
+    <!-- 192s: 16,224 bytes -->
+    <rect x="450" y="487" width="130" height="163" fill="url(#grad2)" rx="5">
+      <animate attributeName="height" from="0" to="163" dur="1.1s" fill="freeze"/>
+      <animate attributeName="y" from="650" to="487" dur="1.1s" fill="freeze"/>
+    </rect>
+    <text x="515" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">192s</text>
+    <text x="515" y="710" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">16,224 B</text>
+    <text x="515" y="728" font-family="Arial, sans-serif" font-size="11" fill="#43e97b" text-anchor="middle">⭐⭐⭐</text>
+    
+    <!-- 192f: 35,664 bytes -->
+    <rect x="600" y="293" width="130" height="357" fill="url(#grad2)" rx="5">
+      <animate attributeName="height" from="0" to="357" dur="1.5s" fill="freeze"/>
+      <animate attributeName="y" from="650" to="293" dur="1.5s" fill="freeze"/>
+    </rect>
+    <text x="665" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">192f</text>
+    <text x="665" y="710" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">35,664 B</text>
+    <text x="665" y="728" font-family="Arial, sans-serif" font-size="11" fill="#43e97b" text-anchor="middle">⭐⭐⭐⭐⭐</text>
+    
+    <!-- 256s: 29,792 bytes -->
+    <rect x="750" y="352" width="130" height="298" fill="url(#grad3)" rx="5">
+      <animate attributeName="height" from="0" to="298" dur="1.3s" fill="freeze"/>
+      <animate attributeName="y" from="650" to="352" dur="1.3s" fill="freeze"/>
+    </rect>
+    <text x="815" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">256s</text>
+    <text x="815" y="710" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">29,792 B</text>
+    <text x="815" y="728" font-family="Arial, sans-serif" font-size="11" fill="#43e97b" text-anchor="middle">⭐⭐⭐</text>
+    
+    <!-- 256f: 49,856 bytes -->
+    <rect x="900" y="150" width="130" height="500" fill="url(#grad3)" rx="5">
+      <animate attributeName="height" from="0" to="500" dur="1.8s" fill="freeze"/>
+      <animate attributeName="y" from="650" to="150" dur="1.8s" fill="freeze"/>
+    </rect>
+    <text x="965" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">256f</text>
+    <text x="965" y="710" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">49,856 B</text>
+    <text x="965" y="728" font-family="Arial, sans-serif" font-size="11" fill="#43e97b" text-anchor="middle">⭐⭐⭐⭐⭐</text>
+  </g>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="880" y="20" width="300" height="100" fill="#1a1a2e" stroke="#667eea" stroke-width="2" rx="10"/>
+    <text x="1030" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">Legend</text>
+    <rect x="900" y="55" width="20" height="20" fill="url(#grad1)" rx="3"/>
+    <text x="930" y="70" font-family="Arial, sans-serif" font-size="12" fill="#b4b4b4">128-bit security</text>
+    <rect x="900" y="82" width="20" height="20" fill="url(#grad2)" rx="3"/>
+    <text x="930" y="97" font-family="Arial, sans-serif" font-size="12" fill="#b4b4b4">192-bit security</text>
+    <rect x="1050" y="55" width="20" height="20" fill="url(#grad3)" rx="3"/>
+    <text x="1080" y="70" font-family="Arial, sans-serif" font-size="12" fill="#b4b4b4">256-bit security</text>
+    <text x="1050" y="97" font-family="Arial, sans-serif" font-size="12" fill="#43e97b">⭐ = Signing Speed</text>
+  </g>
+  
+  <!-- Footer note -->
+  <text x="600" y="770" font-family="Arial, sans-serif" font-size="14" fill="#888888" text-anchor="middle">
+    's' variants: smaller signatures | 'f' variants: faster signing
+  </text>
+</svg>

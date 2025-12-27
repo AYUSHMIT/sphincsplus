@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1100">
+  <defs>
+    <linearGradient id="flowGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="flowGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="flowGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#667eea" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="1100" fill="#0f0f23"/>
+  
+  <!-- Title -->
+  <text x="500" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#667eea" text-anchor="middle">
+    SPHINCS+ Workflow Diagram
+  </text>
+  
+  <text x="500" y="85" font-family="Arial, sans-serif" font-size="16" fill="#b4b4b4" text-anchor="middle">
+    Complete Signature Generation and Verification Process
+  </text>
+  
+  <!-- KEY GENERATION SECTION -->
+  <g id="keygen-section">
+    <rect x="50" y="120" width="400" height="180" fill="#1a1a2e" stroke="url(#flowGrad1)" stroke-width="3" rx="15"/>
+    <text x="250" y="150" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#667eea" text-anchor="middle">
+      1. Key Generation
+    </text>
+    
+    <!-- Steps -->
+    <g id="keygen-steps">
+      <circle cx="90" cy="185" r="15" fill="#667eea"/>
+      <text x="90" y="192" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+      <text x="120" y="192" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="start">
+        Generate random seed (SK_SEED, SK_PRF, PUB_SEED)
+      </text>
+      
+      <circle cx="90" cy="225" r="15" fill="#667eea"/>
+      <text x="90" y="232" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+      <text x="120" y="232" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="start">
+        Compute hypertree root from PUB_SEED
+      </text>
+      
+      <circle cx="90" cy="265" r="15" fill="#667eea"/>
+      <text x="90" y="272" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+      <text x="120" y="272" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="start">
+        Public Key = [root || PUB_SEED]
+      </text>
+    </g>
+    
+    <!-- Output -->
+    <rect x="60" y="170" width="180" height="120" fill="none" stroke="#4facfe" stroke-width="1" stroke-dasharray="4,2" rx="8"/>
+  </g>
+  
+  <!-- Arrow down -->
+  <line x1="250" y1="305" x2="250" y2="345" stroke="#667eea" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="270" y="330" font-family="Arial, sans-serif" font-size="14" fill="#4facfe" text-anchor="start">Keys Ready</text>
+  
+  <!-- SIGNING SECTION -->
+  <g id="signing-section">
+    <rect x="50" y="350" width="400" height="380" fill="#1a1a2e" stroke="url(#flowGrad2)" stroke-width="3" rx="15"/>
+    <text x="250" y="380" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#4facfe" text-anchor="middle">
+      2. Message Signing
+    </text>
+    
+    <!-- Input -->
+    <rect x="70" y="400" width="360" height="40" fill="#16213e" stroke="#4facfe" stroke-width="2" rx="8"/>
+    <text x="250" y="425" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">
+      📄 Input: Message M
+    </text>
+    
+    <!-- Steps -->
+    <g id="signing-steps">
+      <!-- Step A: FORS -->
+      <rect x="70" y="460" width="360" height="60" fill="#16213e" stroke="#f093fb" stroke-width="2" rx="8"/>
+      <circle cx="95" cy="480" r="15" fill="#f093fb"/>
+      <text x="95" y="487" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f0f23" text-anchor="middle">A</text>
+      <text x="120" y="480" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#f093fb" text-anchor="start">
+        FORS Signature
+      </text>
+      <text x="120" y="497" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Hash message to indices
+      </text>
+      <text x="120" y="512" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Generate few-time signature and FORS public key
+      </text>
+      
+      <!-- Step B: Index selection -->
+      <rect x="70" y="535" width="360" height="45" fill="#16213e" stroke="#feca57" stroke-width="2" rx="8"/>
+      <circle cx="95" cy="552" r="15" fill="#feca57"/>
+      <text x="95" y="559" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f0f23" text-anchor="middle">B</text>
+      <text x="120" y="552" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#feca57" text-anchor="start">
+        Select Tree Index
+      </text>
+      <text x="120" y="569" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Determine authentication path through hypertree
+      </text>
+      
+      <!-- Step C: WOTS+ -->
+      <rect x="70" y="595" width="360" height="60" fill="#16213e" stroke="#43e97b" stroke-width="2" rx="8"/>
+      <circle cx="95" cy="615" r="15" fill="#43e97b"/>
+      <text x="95" y="622" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f0f23" text-anchor="middle">C</text>
+      <text x="120" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#43e97b" text-anchor="start">
+        WOTS+ Signatures
+      </text>
+      <text x="120" y="632" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Sign FORS public key with WOTS+ at each layer
+      </text>
+      <text x="120" y="647" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Generate authentication path (sibling nodes)
+      </text>
+      
+      <!-- Step D: Combine -->
+      <rect x="70" y="670" width="360" height="45" fill="#16213e" stroke="#667eea" stroke-width="2" rx="8"/>
+      <circle cx="95" cy="687" r="15" fill="#667eea"/>
+      <text x="95" y="694" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">D</text>
+      <text x="120" y="687" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#667eea" text-anchor="start">
+        Combine Components
+      </text>
+      <text x="120" y="704" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Signature = FORS_sig || Auth_path || WOTS+_sigs
+      </text>
+    </g>
+  </g>
+  
+  <!-- Arrow down -->
+  <line x1="250" y1="735" x2="250" y2="775" stroke="#667eea" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="270" y="760" font-family="Arial, sans-serif" font-size="14" fill="#43e97b" text-anchor="start">✍️ Signature</text>
+  
+  <!-- VERIFICATION SECTION -->
+  <g id="verification-section">
+    <rect x="550" y="350" width="400" height="380" fill="#1a1a2e" stroke="url(#flowGrad3)" stroke-width="3" rx="15"/>
+    <text x="750" y="380" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#43e97b" text-anchor="middle">
+      3. Signature Verification
+    </text>
+    
+    <!-- Input -->
+    <rect x="570" y="400" width="360" height="55" fill="#16213e" stroke="#43e97b" stroke-width="2" rx="8"/>
+    <text x="750" y="420" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">
+      📄 Input: Message M + Signature
+    </text>
+    <text x="750" y="440" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">
+      🔑 Public Key
+    </text>
+    
+    <!-- Steps -->
+    <g id="verify-steps">
+      <!-- Step 1: Parse -->
+      <rect x="570" y="475" width="360" height="45" fill="#16213e" stroke="#4facfe" stroke-width="2" rx="8"/>
+      <circle cx="595" cy="492" r="15" fill="#4facfe"/>
+      <text x="595" y="499" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f0f23" text-anchor="middle">1</text>
+      <text x="620" y="492" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#4facfe" text-anchor="start">
+        Parse Signature
+      </text>
+      <text x="620" y="509" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Extract FORS_sig, Auth_path, WOTS+_sigs
+      </text>
+      
+      <!-- Step 2: Verify FORS -->
+      <rect x="570" y="535" width="360" height="45" fill="#16213e" stroke="#f093fb" stroke-width="2" rx="8"/>
+      <circle cx="595" cy="552" r="15" fill="#f093fb"/>
+      <text x="595" y="559" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f0f23" text-anchor="middle">2</text>
+      <text x="620" y="552" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#f093fb" text-anchor="start">
+        Verify FORS Signature
+      </text>
+      <text x="620" y="569" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Recompute FORS public key from message
+      </text>
+      
+      <!-- Step 3: Verify WOTS+ chain -->
+      <rect x="570" y="595" width="360" height="60" fill="#16213e" stroke="#43e97b" stroke-width="2" rx="8"/>
+      <circle cx="595" cy="615" r="15" fill="#43e97b"/>
+      <text x="595" y="622" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f0f23" text-anchor="middle">3</text>
+      <text x="620" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#43e97b" text-anchor="start">
+        Verify WOTS+ Chain
+      </text>
+      <text x="620" y="632" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Verify WOTS+ signature at each layer
+      </text>
+      <text x="620" y="647" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Use auth path to recompute root
+      </text>
+      
+      <!-- Step 4: Compare -->
+      <rect x="570" y="670" width="360" height="45" fill="#16213e" stroke="#667eea" stroke-width="2" rx="8"/>
+      <circle cx="595" cy="687" r="15" fill="#667eea"/>
+      <text x="595" y="694" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
+      <text x="620" y="687" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#667eea" text-anchor="start">
+        Compare Root
+      </text>
+      <text x="620" y="704" font-family="Arial, sans-serif" font-size="11" fill="#b4b4b4" text-anchor="start">
+        • Check if recomputed root matches public key
+      </text>
+    </g>
+  </g>
+  
+  <!-- Results -->
+  <g id="results">
+    <rect x="570" y="780" width="170" height="70" fill="#16213e" stroke="#43e97b" stroke-width="3" rx="10"/>
+    <text x="655" y="810" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#43e97b" text-anchor="middle">
+      ✅ Valid
+    </text>
+    <text x="655" y="830" font-family="Arial, sans-serif" font-size="12" fill="#b4b4b4" text-anchor="middle">
+      Signature Verified
+    </text>
+    
+    <rect x="760" y="780" width="170" height="70" fill="#16213e" stroke="#f5576c" stroke-width="3" rx="10"/>
+    <text x="845" y="810" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#f5576c" text-anchor="middle">
+      ❌ Invalid
+    </text>
+    <text x="845" y="830" font-family="Arial, sans-serif" font-size="12" fill="#b4b4b4" text-anchor="middle">
+      Verification Failed
+    </text>
+    
+    <!-- Arrows to results -->
+    <line x1="750" y1="735" x2="655" y2="775" stroke="#43e97b" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="750" y1="735" x2="845" y2="775" stroke="#f5576c" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+  
+  <!-- Key Information Box -->
+  <g id="info-box">
+    <rect x="50" y="880" width="900" height="180" fill="#1a1a2e" stroke="#667eea" stroke-width="2" rx="15"/>
+    
+    <text x="500" y="910" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#667eea" text-anchor="middle">
+      Key Properties of SPHINCS+
+    </text>
+    
+    <g id="properties">
+      <text x="70" y="940" font-family="Arial, sans-serif" font-size="13" fill="#43e97b" text-anchor="start">
+        ✅ <tspan font-weight="bold">Stateless:</tspan> No need to track signature counter
+      </text>
+      <text x="70" y="960" font-family="Arial, sans-serif" font-size="13" fill="#43e97b" text-anchor="start">
+        ✅ <tspan font-weight="bold">Quantum-Resistant:</tspan> Based on hash function security
+      </text>
+      <text x="70" y="980" font-family="Arial, sans-serif" font-size="13" fill="#43e97b" text-anchor="start">
+        ✅ <tspan font-weight="bold">Well-Studied:</tspan> Decades of research on hash-based signatures
+      </text>
+      <text x="70" y="1000" font-family="Arial, sans-serif" font-size="13" fill="#43e97b" text-anchor="start">
+        ✅ <tspan font-weight="bold">NIST Standard:</tspan> Selected for standardization in 2022
+      </text>
+      
+      <text x="520" y="940" font-family="Arial, sans-serif" font-size="13" fill="#feca57" text-anchor="start">
+        ⚙️ <tspan font-weight="bold">Flexible:</tspan> 6 parameter sets (128/192/256-bit security)
+      </text>
+      <text x="520" y="960" font-family="Arial, sans-serif" font-size="13" fill="#feca57" text-anchor="start">
+        ⚙️ <tspan font-weight="bold">Trade-offs:</tspan> Size vs Speed (s vs f variants)
+      </text>
+      <text x="520" y="980" font-family="Arial, sans-serif" font-size="13" fill="#feca57" text-anchor="start">
+        ⚙️ <tspan font-weight="bold">Hash Options:</tspan> SHA-256, SHAKE256, Haraka
+      </text>
+      <text x="520" y="1000" font-family="Arial, sans-serif" font-size="13" fill="#feca57" text-anchor="start">
+        ⚙️ <tspan font-weight="bold">Optimized:</tspan> AVX2 and AESNI implementations available
+      </text>
+    </g>
+    
+    <text x="500" y="1040" font-family="Arial, sans-serif" font-size="12" fill="#4facfe" text-anchor="middle">
+      Signature sizes: 7.8 KB (128s) to 49.9 KB (256f) • Verification is fast (~ms)
+    </text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="500" y="1085" font-family="Arial, sans-serif" font-size="12" fill="#888888" text-anchor="middle">
+    For more details, visit: https://sphincs.org/
+  </text>
+</svg>
