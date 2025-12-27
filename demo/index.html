@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPHINCS+ Interactive Demo - Post-Quantum Cryptography</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-shield-alt"></i> SPHINCS+ Interactive Demo</h1>
+                <p class="subtitle">Experience Post-Quantum Cryptography in Action</p>
+                <div class="badges">
+                    <span class="badge badge-quantum">🔮 Quantum-Resistant</span>
+                    <span class="badge badge-nist">📜 NIST Standard</span>
+                    <span class="badge badge-secure">🔐 Hash-Based</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="overview">
+                <i class="fas fa-home"></i> Overview
+            </button>
+            <button class="nav-tab" data-tab="keygen">
+                <i class="fas fa-key"></i> Key Generation
+            </button>
+            <button class="nav-tab" data-tab="signing">
+                <i class="fas fa-signature"></i> Signing
+            </button>
+            <button class="nav-tab" data-tab="verify">
+                <i class="fas fa-check-circle"></i> Verification
+            </button>
+            <button class="nav-tab" data-tab="compare">
+                <i class="fas fa-chart-bar"></i> Compare
+            </button>
+            <button class="nav-tab" data-tab="visualize">
+                <i class="fas fa-project-diagram"></i> Visualize
+            </button>
+        </nav>
+
+        <!-- Tab Contents -->
+        <main class="content">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">🛡️</div>
+                        <h3>What is SPHINCS+?</h3>
+                        <p>SPHINCS+ is a stateless hash-based signature scheme selected by NIST as a post-quantum cryptography standard. Unlike RSA and ECDSA, it remains secure against quantum computers.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⚛️</div>
+                        <h3>Quantum Threat</h3>
+                        <p>Quantum computers running Shor's algorithm can break RSA, ECDSA, and other classical cryptosystems. SPHINCS+ is designed to resist these attacks.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🌳</div>
+                        <h3>Hash-Based Security</h3>
+                        <p>Security relies only on the collision and preimage resistance of cryptographic hash functions—a minimal and well-understood assumption.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⚙️</div>
+                        <h3>Flexible Parameters</h3>
+                        <p>Choose between 6 parameter sets offering trade-offs between signature size, signing speed, and security level (128, 192, or 256 bits).</p>
+                    </div>
+                </div>
+
+                <div class="architecture-section">
+                    <h2>Architecture Overview</h2>
+                    <div class="architecture-diagram">
+                        <pre class="ascii-art">
+┌─────────────────────────────────────────────────────────┐
+│                SPHINCS+ ARCHITECTURE                    │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Message ──► FORS Signature ──► Hypertree              │
+│                                                         │
+│  ┌──────────────┐      ┌──────────────┐               │
+│  │    FORS      │      │   Hypertree  │               │
+│  │              │      │              │               │
+│  │  k indices   │──►   │   Root (PK)  │               │
+│  │  signature   │      │      │       │               │
+│  └──────────────┘      │   d layers   │               │
+│                        │   WOTS+      │               │
+│                        └──────────────┘               │
+│                                                         │
+│  Final Signature = FORS_sig + Auth_path + WOTS+_sigs  │
+└─────────────────────────────────────────────────────────┘
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="quick-start">
+                    <h2>Quick Start</h2>
+                    <ol>
+                        <li><strong>Select Parameters:</strong> Choose a parameter set in the "Key Generation" tab</li>
+                        <li><strong>Generate Keys:</strong> Click "Generate Key Pair" to create quantum-safe keys</li>
+                        <li><strong>Sign Message:</strong> Enter a message and sign it in the "Signing" tab</li>
+                        <li><strong>Verify:</strong> Check the signature validity in the "Verification" tab</li>
+                        <li><strong>Compare:</strong> Explore different parameter sets and their trade-offs</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Key Generation Tab -->
+            <div id="keygen" class="tab-content">
+                <h2>Key Generation</h2>
+                
+                <div class="parameter-selection">
+                    <h3>Select Parameter Set</h3>
+                    <div class="param-grid">
+                        <label class="param-option">
+                            <input type="radio" name="params" value="128s" checked>
+                            <div class="param-card">
+                                <div class="param-header">SPHINCS+-128s</div>
+                                <div class="param-details">
+                                    <div class="param-row">
+                                        <span class="param-label">Security:</span>
+                                        <span class="param-value">128-bit</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Sig Size:</span>
+                                        <span class="param-value">7,856 B</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Speed:</span>
+                                        <span class="param-value">⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="param-option">
+                            <input type="radio" name="params" value="128f">
+                            <div class="param-card">
+                                <div class="param-header">SPHINCS+-128f</div>
+                                <div class="param-details">
+                                    <div class="param-row">
+                                        <span class="param-label">Security:</span>
+                                        <span class="param-value">128-bit</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Sig Size:</span>
+                                        <span class="param-value">17,088 B</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Speed:</span>
+                                        <span class="param-value">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="param-option">
+                            <input type="radio" name="params" value="192s">
+                            <div class="param-card">
+                                <div class="param-header">SPHINCS+-192s</div>
+                                <div class="param-details">
+                                    <div class="param-row">
+                                        <span class="param-label">Security:</span>
+                                        <span class="param-value">192-bit</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Sig Size:</span>
+                                        <span class="param-value">16,224 B</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Speed:</span>
+                                        <span class="param-value">⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="param-option">
+                            <input type="radio" name="params" value="192f">
+                            <div class="param-card">
+                                <div class="param-header">SPHINCS+-192f</div>
+                                <div class="param-details">
+                                    <div class="param-row">
+                                        <span class="param-label">Security:</span>
+                                        <span class="param-value">192-bit</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Sig Size:</span>
+                                        <span class="param-value">35,664 B</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Speed:</span>
+                                        <span class="param-value">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="param-option">
+                            <input type="radio" name="params" value="256s">
+                            <div class="param-card">
+                                <div class="param-header">SPHINCS+-256s</div>
+                                <div class="param-details">
+                                    <div class="param-row">
+                                        <span class="param-label">Security:</span>
+                                        <span class="param-value">256-bit</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Sig Size:</span>
+                                        <span class="param-value">29,792 B</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Speed:</span>
+                                        <span class="param-value">⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="param-option">
+                            <input type="radio" name="params" value="256f">
+                            <div class="param-card">
+                                <div class="param-header">SPHINCS+-256f</div>
+                                <div class="param-details">
+                                    <div class="param-row">
+                                        <span class="param-label">Security:</span>
+                                        <span class="param-value">256-bit</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Sig Size:</span>
+                                        <span class="param-value">49,856 B</span>
+                                    </div>
+                                    <div class="param-row">
+                                        <span class="param-label">Speed:</span>
+                                        <span class="param-value">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="action-section">
+                    <button id="generateKeysBtn" class="btn btn-primary btn-large">
+                        <i class="fas fa-key"></i> Generate Key Pair
+                    </button>
+                </div>
+
+                <div id="keygenProgress" class="progress-section" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text">Generating quantum-safe keys...</p>
+                </div>
+
+                <div id="keygenResult" class="result-section" style="display: none;">
+                    <div class="result-success">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Keys Generated Successfully!</h3>
+                    </div>
+                    <div class="key-display">
+                        <div class="key-box">
+                            <h4><i class="fas fa-unlock"></i> Public Key</h4>
+                            <div class="key-content" id="publicKeyDisplay"></div>
+                            <p class="key-info">Size: <span id="pkSize"></span> bytes</p>
+                        </div>
+                        <div class="key-box">
+                            <h4><i class="fas fa-lock"></i> Secret Key</h4>
+                            <div class="key-content" id="secretKeyDisplay"></div>
+                            <p class="key-info">Size: <span id="skSize"></span> bytes</p>
+                        </div>
+                    </div>
+                    <p class="key-note">
+                        <i class="fas fa-info-circle"></i> 
+                        The secret key should be kept private. The public key can be shared freely.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Signing Tab -->
+            <div id="signing" class="tab-content">
+                <h2>Message Signing</h2>
+                
+                <div class="signing-section">
+                    <div class="input-group">
+                        <label for="messageInput">
+                            <i class="fas fa-envelope"></i> Message to Sign
+                        </label>
+                        <textarea id="messageInput" 
+                                  placeholder="Enter your message here..."
+                                  rows="5">Hello, Quantum World!</textarea>
+                    </div>
+
+                    <button id="signBtn" class="btn btn-primary btn-large" disabled>
+                        <i class="fas fa-signature"></i> Sign Message
+                    </button>
+
+                    <div id="signProgress" class="progress-section" style="display: none;">
+                        <div class="signing-steps">
+                            <div class="step" data-step="1">
+                                <div class="step-icon">1</div>
+                                <div class="step-text">Hashing message</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-icon">2</div>
+                                <div class="step-text">Generating FORS signature</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-icon">3</div>
+                                <div class="step-text">Computing WOTS+ signatures</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-icon">4</div>
+                                <div class="step-text">Building authentication path</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="signResult" class="result-section" style="display: none;">
+                        <div class="result-success">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Message Signed Successfully!</h3>
+                        </div>
+                        <div class="signature-display">
+                            <h4><i class="fas fa-file-signature"></i> Signature</h4>
+                            <div class="signature-content" id="signatureDisplay"></div>
+                            <div class="signature-info">
+                                <div class="info-row">
+                                    <span class="info-label">Size:</span>
+                                    <span class="info-value" id="sigSize"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span class="info-value" id="sigTime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification Tab -->
+            <div id="verify" class="tab-content">
+                <h2>Signature Verification</h2>
+                
+                <div class="verify-section">
+                    <div class="verify-info">
+                        <p>
+                            <i class="fas fa-info-circle"></i>
+                            Verification checks that the signature was created with the corresponding secret key and that the message hasn't been modified.
+                        </p>
+                    </div>
+
+                    <button id="verifyBtn" class="btn btn-primary btn-large" disabled>
+                        <i class="fas fa-check-circle"></i> Verify Signature
+                    </button>
+
+                    <div id="verifyProgress" class="progress-section" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p class="progress-text">Verifying signature...</p>
+                    </div>
+
+                    <div id="verifyResult" class="result-section" style="display: none;">
+                        <div class="verify-result-content">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="tamper-section">
+                        <h3>Try Tampering</h3>
+                        <p>Modify the message or signature to see verification fail:</p>
+                        <div class="tamper-buttons">
+                            <button id="tamperMessageBtn" class="btn btn-secondary" disabled>
+                                <i class="fas fa-edit"></i> Tamper with Message
+                            </button>
+                            <button id="tamperSigBtn" class="btn btn-secondary" disabled>
+                                <i class="fas fa-random"></i> Corrupt Signature
+                            </button>
+                            <button id="resetBtn" class="btn btn-secondary" disabled>
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compare Tab -->
+            <div id="compare" class="tab-content">
+                <h2>Parameter Comparison</h2>
+                
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter Set</th>
+                                <th>Security</th>
+                                <th>Public Key</th>
+                                <th>Secret Key</th>
+                                <th>Signature</th>
+                                <th>Sign Speed</th>
+                                <th>Verify Speed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>SPHINCS+-128s</strong></td>
+                                <td>128-bit</td>
+                                <td>32 B</td>
+                                <td>64 B</td>
+                                <td class="highlight">7,856 B</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SPHINCS+-128f</strong></td>
+                                <td>128-bit</td>
+                                <td>32 B</td>
+                                <td>64 B</td>
+                                <td>17,088 B</td>
+                                <td class="highlight">⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SPHINCS+-192s</strong></td>
+                                <td>192-bit</td>
+                                <td>48 B</td>
+                                <td>96 B</td>
+                                <td class="highlight">16,224 B</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SPHINCS+-192f</strong></td>
+                                <td>192-bit</td>
+                                <td>48 B</td>
+                                <td>96 B</td>
+                                <td>35,664 B</td>
+                                <td class="highlight">⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SPHINCS+-256s</strong></td>
+                                <td>256-bit</td>
+                                <td>64 B</td>
+                                <td>128 B</td>
+                                <td class="highlight">29,792 B</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SPHINCS+-256f</strong></td>
+                                <td>256-bit</td>
+                                <td>64 B</td>
+                                <td>128 B</td>
+                                <td>49,856 B</td>
+                                <td class="highlight">⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="comparison-charts">
+                    <h3>Visual Comparisons</h3>
+                    <canvas id="comparisonChart" width="800" height="400"></canvas>
+                </div>
+
+                <div class="classical-comparison">
+                    <h3>Classical vs Post-Quantum</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>RSA-2048</h4>
+                            <div class="comparison-detail">
+                                <span class="label">Signature:</span>
+                                <span class="value">256 bytes</span>
+                            </div>
+                            <div class="comparison-detail">
+                                <span class="label">Quantum Safe:</span>
+                                <span class="value danger">❌ No</span>
+                            </div>
+                        </div>
+                        <div class="comparison-card">
+                            <h4>ECDSA-256</h4>
+                            <div class="comparison-detail">
+                                <span class="label">Signature:</span>
+                                <span class="value">64 bytes</span>
+                            </div>
+                            <div class="comparison-detail">
+                                <span class="label">Quantum Safe:</span>
+                                <span class="value danger">❌ No</span>
+                            </div>
+                        </div>
+                        <div class="comparison-card highlight-card">
+                            <h4>SPHINCS+-128s</h4>
+                            <div class="comparison-detail">
+                                <span class="label">Signature:</span>
+                                <span class="value">7,856 bytes</span>
+                            </div>
+                            <div class="comparison-detail">
+                                <span class="label">Quantum Safe:</span>
+                                <span class="value success">✅ Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualize Tab -->
+            <div id="visualize" class="tab-content">
+                <h2>Merkle Tree Visualization</h2>
+                
+                <div class="visualization-controls">
+                    <label>
+                        <input type="checkbox" id="animateTree" checked>
+                        Animate signature process
+                    </label>
+                    <button id="resetVisualization" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+
+                <div class="tree-visualization">
+                    <canvas id="merkleTreeCanvas" width="800" height="600"></canvas>
+                </div>
+
+                <div class="visualization-legend">
+                    <h3>Legend</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #667eea;"></div>
+                            <span>Root / Public Key</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #f093fb;"></div>
+                            <span>Authentication Path</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4facfe;"></div>
+                            <span>WOTS+ Signature</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #43e97b;"></div>
+                            <span>Leaf / Message</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visualization-explanation">
+                    <h3>How It Works</h3>
+                    <ol>
+                        <li><strong>Message Hashing:</strong> The message is hashed to produce a digest</li>
+                        <li><strong>FORS Signature:</strong> A few-time signature is generated for the message</li>
+                        <li><strong>Tree Selection:</strong> A path through the hypertree is selected</li>
+                        <li><strong>WOTS+ Signatures:</strong> One-time signatures are computed at each layer</li>
+                        <li><strong>Authentication Path:</strong> Sibling nodes are collected to verify the path</li>
+                        <li><strong>Final Signature:</strong> All components are combined into the signature</li>
+                    </ol>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>
+                    <strong>SPHINCS+ Demo</strong> - 
+                    <a href="https://sphincs.org" target="_blank">Official Website</a> | 
+                    <a href="https://csrc.nist.gov/Projects/Post-Quantum-Cryptography" target="_blank">NIST PQC</a> | 
+                    <a href="https://github.com/AYUSHMIT/sphincsplus" target="_blank">GitHub</a>
+                </p>
+                <p class="footer-note">
+                    🔐 This is a demonstration implementation. For production use, please use the official reference implementation.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="demo.js"></script>
+</body>
+</html>
